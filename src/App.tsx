@@ -88,112 +88,112 @@ import {
 const sample = JSON.stringify(
   [
     {
-      nama: "Ayu Pratama",
-      email: "ayu@contoh.id",
-      divisi: "Design",
-      kota: "Jakarta",
+      name: "Ayu Pratama",
+      email: "ayu@example.com",
+      department: "Design",
+      city: "Jakarta",
       status: "Full-time",
-      gaji: 12000000,
-      aktif: true,
+      salary: 12000000,
+      active: true,
     },
     {
-      nama: "Bima Saputra",
-      email: "bima@contoh.id",
-      divisi: "Engineering",
-      kota: "Bandung",
+      name: "Bima Saputra",
+      email: "bima@example.com",
+      department: "Engineering",
+      city: "Bandung",
       status: "Full-time",
-      gaji: 18000000,
-      aktif: true,
+      salary: 18000000,
+      active: true,
     },
     {
-      nama: "Citra Lestari",
-      email: "citra@contoh.id",
-      divisi: "Marketing",
-      kota: "Surabaya",
+      name: "Citra Lestari",
+      email: "citra@example.com",
+      department: "Marketing",
+      city: "Surabaya",
       status: "Contract",
-      gaji: 9500000,
-      aktif: true,
+      salary: 9500000,
+      active: true,
     },
     {
-      nama: "Dimas Wijaya",
-      email: "dimas@contoh.id",
-      divisi: "Engineering",
-      kota: "Jakarta",
+      name: "Dimas Wijaya",
+      email: "dimas@example.com",
+      department: "Engineering",
+      city: "Jakarta",
       status: "Full-time",
-      gaji: 22000000,
-      aktif: true,
+      salary: 22000000,
+      active: true,
     },
     {
-      nama: "Eka Putri",
-      email: "eka@contoh.id",
-      divisi: "Design",
-      kota: "Yogyakarta",
+      name: "Eka Putri",
+      email: "eka@example.com",
+      department: "Design",
+      city: "Yogyakarta",
       status: "Freelance",
-      gaji: 8500000,
-      aktif: false,
+      salary: 8500000,
+      active: false,
     },
     {
-      nama: "Fajar Hidayat",
-      email: "fajar@contoh.id",
-      divisi: "Operations",
-      kota: "Bandung",
+      name: "Fajar Hidayat",
+      email: "fajar@example.com",
+      department: "Operations",
+      city: "Bandung",
       status: "Full-time",
-      gaji: 11000000,
-      aktif: true,
+      salary: 11000000,
+      active: true,
     },
     {
-      nama: "Gita Maharani",
-      email: "gita@contoh.id",
-      divisi: "Marketing",
-      kota: "Jakarta",
+      name: "Gita Maharani",
+      email: "gita@example.com",
+      department: "Marketing",
+      city: "Jakarta",
       status: "Full-time",
-      gaji: 13500000,
-      aktif: true,
+      salary: 13500000,
+      active: true,
     },
     {
-      nama: "Hadi Kusuma",
-      email: "hadi@contoh.id",
-      divisi: "Engineering",
-      kota: "Surabaya",
+      name: "Hadi Kusuma",
+      email: "hadi@example.com",
+      department: "Engineering",
+      city: "Surabaya",
       status: "Contract",
-      gaji: 15000000,
-      aktif: false,
+      salary: 15000000,
+      active: false,
     },
     {
-      nama: "Indah Permata",
-      email: "indah@contoh.id",
-      divisi: "Design",
-      kota: "Bandung",
+      name: "Indah Permata",
+      email: "indah@example.com",
+      department: "Design",
+      city: "Bandung",
       status: "Full-time",
-      gaji: 14000000,
-      aktif: true,
+      salary: 14000000,
+      active: true,
     },
     {
-      nama: "Joko Santoso",
-      email: "joko@contoh.id",
-      divisi: "Operations",
-      kota: "Jakarta",
+      name: "Joko Santoso",
+      email: "joko@example.com",
+      department: "Operations",
+      city: "Jakarta",
       status: "Full-time",
-      gaji: 10500000,
-      aktif: true,
+      salary: 10500000,
+      active: true,
     },
     {
-      nama: "Kartika Dewi",
-      email: "kartika@contoh.id",
-      divisi: "Marketing",
-      kota: "Yogyakarta",
+      name: "Kartika Dewi",
+      email: "kartika@example.com",
+      department: "Marketing",
+      city: "Yogyakarta",
       status: "Freelance",
-      gaji: 8000000,
-      aktif: false,
+      salary: 8000000,
+      active: false,
     },
     {
-      nama: "Lukman Hakim",
-      email: "lukman@contoh.id",
-      divisi: "Engineering",
-      kota: "Bandung",
+      name: "Lukman Hakim",
+      email: "lukman@example.com",
+      department: "Engineering",
+      city: "Bandung",
       status: "Full-time",
-      gaji: 20000000,
-      aktif: true,
+      salary: 20000000,
+      active: true,
     },
   ],
   null,
@@ -232,7 +232,7 @@ export function App() {
   const [pageSize, setPageSize] = useState(10)
   const [error, setError] = useState("")
   const [message, setMessage] = useState("")
-  const [fileName, setFileName] = useState("Data contoh")
+  const [fileName, setFileName] = useState("Sample data")
   const [importing, setImporting] = useState(false)
   const [inputTab, setInputTab] = useState("paste")
   const fileRef = useRef<HTMLInputElement>(null)
@@ -292,11 +292,11 @@ export function App() {
       setVisible(next.columns)
       setFileName(name)
       setError("")
-      setMessage(`${next.rows.length} baris berhasil dikonversi.`)
+      setMessage(`${next.rows.length} rows converted.`)
       return true
     } catch (cause) {
       setError(
-        cause instanceof Error ? cause.message : "JSON tidak dapat diproses."
+        cause instanceof Error ? cause.message : "Unable to process JSON."
       )
       setMessage("")
       return false
@@ -306,7 +306,7 @@ export function App() {
   async function importFile(file: File | undefined) {
     if (!file || importing) return
     if (file.size > MAX_BYTES) {
-      setError("File terlalu besar. Maksimal 5 MB.")
+      setError("File too large. Maximum size: 5 MB.")
       return
     }
     setImporting(true)
@@ -315,7 +315,7 @@ export function App() {
       if (applyJson(text.replace(/^\uFEFF/, ""), file.name))
         setInputTab("paste")
     } catch {
-      setError("File tidak dapat dibaca. Coba unggah ulang.")
+      setError("Unable to read the file. Try uploading it again.")
     } finally {
       setImporting(false)
       if (fileRef.current) fileRef.current.value = ""
@@ -371,11 +371,9 @@ export function App() {
   async function copyJson() {
     try {
       await navigator.clipboard.writeText(draft)
-      setMessage("JSON disalin ke clipboard.")
+      setMessage("JSON copied to clipboard.")
     } catch {
-      setError(
-        "Tidak dapat menyalin. Pilih teks JSON lalu salin secara manual."
-      )
+      setError("Unable to copy. Select the JSON text and copy it manually.")
     }
   }
 
@@ -388,15 +386,15 @@ export function App() {
       url = URL.createObjectURL(blob)
       const link = document.createElement("a")
       link.href = url
-      link.download = "hasil-tabel.csv"
+      link.download = "table-results.csv"
       document.body.append(link)
       link.click()
       link.remove()
       setMessage(
-        `${filteredRows.length} baris, ${visible.length} kolom diekspor.`
+        `${filteredRows.length} rows, ${visible.length} columns exported.`
       )
     } catch {
-      setError("Ekspor gagal. Coba kembali dengan data yang lebih kecil.")
+      setError("Export failed. Try again with a smaller dataset.")
     } finally {
       if (url) {
         const downloadUrl = url
@@ -413,7 +411,7 @@ export function App() {
             <a
               href="./"
               className="flex items-center gap-2.5"
-              aria-label="JSON to Table, beranda"
+              aria-label="JSON to Table, home"
             >
               <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <HugeiconsIcon
@@ -436,7 +434,7 @@ export function App() {
                       href="https://github.com/ranzxm/jsontotable"
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Repository GitHub (tab baru)"
+                      aria-label="GitHub repository (opens in a new tab)"
                     >
                       <HugeiconsIcon icon={GithubIcon} />
                     </a>
@@ -449,7 +447,7 @@ export function App() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    aria-label="Ganti tema"
+                    aria-label="Toggle theme"
                     onClick={() =>
                       setTheme(
                         document.documentElement.classList.contains("dark")
@@ -463,7 +461,7 @@ export function App() {
                     />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Ganti tema · D</TooltipContent>
+                <TooltipContent>Toggle theme · D</TooltipContent>
               </Tooltip>
             </div>
           </div>
@@ -471,7 +469,7 @@ export function App() {
 
         <main className="mx-auto max-w-screen-2xl space-y-6 px-4 py-8 sm:px-8">
           <div className="grid items-start gap-5 lg:grid-cols-[320px_minmax(0,1fr)] xl:grid-cols-[350px_minmax(0,1fr)]">
-            <aside className="min-w-0 space-y-4" aria-label="Input JSON">
+            <aside className="min-w-0 space-y-4" aria-label="JSON input">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -485,10 +483,10 @@ export function App() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => applyJson(sample, "Data contoh")}
+                      onClick={() => applyJson(sample, "Sample data")}
                       disabled={importing}
                     >
-                      Data contoh
+                      Sample data
                     </Button>
                   </CardAction>
                 </CardHeader>
@@ -497,11 +495,11 @@ export function App() {
                     <TabsList className="w-full">
                       <TabsTrigger value="paste">
                         <HugeiconsIcon icon={SourceCodeIcon} />
-                        Tempel JSON
+                        Paste JSON
                       </TabsTrigger>
                       <TabsTrigger value="upload">
                         <HugeiconsIcon icon={Upload04Icon} />
-                        Unggah file
+                        Upload file
                       </TabsTrigger>
                     </TabsList>
                     <TabsContent value="paste" className="mt-3 space-y-2">
@@ -512,7 +510,7 @@ export function App() {
                         <div className="flex items-center gap-1">
                           {dirty && (
                             <span className="text-[10px] text-muted-foreground">
-                              Belum diterapkan
+                              Unapplied changes
                             </span>
                           )}
                           <Tooltip>
@@ -520,14 +518,14 @@ export function App() {
                               <Button
                                 size="icon-xs"
                                 variant="ghost"
-                                aria-label="Salin JSON"
+                                aria-label="Copy JSON"
                                 onClick={copyJson}
                                 disabled={!draft}
                               >
                                 <HugeiconsIcon icon={Copy01Icon} />
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>Salin JSON</TooltipContent>
+                            <TooltipContent>Copy JSON</TooltipContent>
                           </Tooltip>
                         </div>
                       </div>
@@ -541,7 +539,7 @@ export function App() {
                         spellCheck={false}
                         disabled={importing}
                         placeholder={
-                          '[\n  { "nama": "Ayu", "kota": "Jakarta" }\n]'
+                          '[\n  { "name": "Ayu", "city": "Jakarta" }\n]'
                         }
                         className="h-[390px] min-h-56 resize-y font-mono text-xs leading-relaxed"
                       />
@@ -561,16 +559,16 @@ export function App() {
                             className="size-5 text-muted-foreground"
                           />
                         </div>
-                        <p className="font-medium">Tarik file JSON ke sini</p>
+                        <p className="font-medium">Drop a JSON file here</p>
                         <Button
                           variant="outline"
                           onClick={() => fileRef.current?.click()}
                           disabled={importing}
                         >
                           <HugeiconsIcon icon={Upload04Icon} />
-                          {importing ? "Membaca file…" : "Pilih file .json"}
+                          {importing ? "Reading file…" : "Choose .json file"}
                         </Button>
-                        <p className="text-muted-foreground">Maksimal 5 MB</p>
+                        <p className="text-muted-foreground">Maximum 5 MB</p>
                       </div>
                     </TabsContent>
                   </Tabs>
@@ -580,14 +578,14 @@ export function App() {
                     accept=".json,application/json"
                     className="hidden"
                     tabIndex={-1}
-                    aria-label="Pilih file JSON"
+                    aria-label="Choose JSON file"
                     onChange={(event) =>
                       void importFile(event.target.files?.[0])
                     }
                   />
                   {data.sources.length > 0 && (
                     <div className="space-y-2">
-                      <Label htmlFor="data-source">Array sumber</Label>
+                      <Label htmlFor="data-source">Source array</Label>
                       <Select
                         value={`source:${data.source ?? ""}`}
                         disabled={dirty || importing}
@@ -601,7 +599,7 @@ export function App() {
                         <SelectContent>
                           {data.sources.map((source) => (
                             <SelectItem key={source} value={`source:${source}`}>
-                              {source || "(nama properti kosong)"}
+                              {source || "(empty property name)"}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -616,7 +614,7 @@ export function App() {
                     disabled={importing}
                   >
                     <HugeiconsIcon icon={Table01Icon} />
-                    Buat tabel
+                    Create table
                     <HugeiconsIcon
                       icon={ArrowRight01Icon}
                       className="ml-auto"
@@ -627,34 +625,34 @@ export function App() {
                       <Button
                         variant="outline"
                         size="icon"
-                        aria-label="Kosongkan editor"
+                        aria-label="Clear editor"
                         disabled={importing || !draft}
                         onClick={() => {
                           setDraft("")
                           setError("")
                           setMessage(
-                            "Editor kosong. Tabel sebelumnya tetap tersedia."
+                            "Editor cleared. The previous table is still available."
                           )
                         }}
                       >
                         <HugeiconsIcon icon={Delete02Icon} />
                       </Button>
                     </TooltipTrigger>
-                    <TooltipContent>Kosongkan editor</TooltipContent>
+                    <TooltipContent>Clear editor</TooltipContent>
                   </Tooltip>
                 </CardFooter>
               </Card>
               {error && (
                 <Alert variant="destructive">
-                  <AlertTitle>Gagal</AlertTitle>
+                  <AlertTitle>Error</AlertTitle>
                   <AlertDescription>
-                    {error} Tabel sebelumnya tidak diubah.
+                    {error} The previous table is unchanged.
                   </AlertDescription>
                 </Alert>
               )}
             </aside>
 
-            <section className="min-w-0 space-y-4" aria-label="Hasil tabel">
+            <section className="min-w-0 space-y-4" aria-label="Table results">
               <Card>
                 <CardHeader className="border-b">
                   <CardTitle className="flex items-center gap-2">
@@ -662,7 +660,7 @@ export function App() {
                       icon={Table01Icon}
                       className="size-4 text-muted-foreground"
                     />
-                    Tabel
+                    Table
                   </CardTitle>
                   <CardDescription className="max-w-44 truncate sm:max-w-none">
                     {fileName}
@@ -678,7 +676,7 @@ export function App() {
                       onClick={exportCsv}
                     >
                       <HugeiconsIcon icon={Download04Icon} />
-                      Ekspor CSV
+                      Export CSV
                     </Button>
                   </CardAction>
                 </CardHeader>
@@ -692,8 +690,8 @@ export function App() {
                           className="pointer-events-none absolute top-1/2 left-2 size-3.5 -translate-y-1/2 text-muted-foreground"
                         />
                         <Input
-                          aria-label="Cari di kolom yang tampil"
-                          placeholder="Cari di kolom yang tampil…"
+                          aria-label="Search visible columns"
+                          placeholder="Search visible columns…"
                           value={query}
                           onChange={(event) => {
                             setQuery(event.target.value)
@@ -721,17 +719,17 @@ export function App() {
                         <PopoverTrigger asChild>
                           <Button variant="outline">
                             <HugeiconsIcon icon={ColumnInsertIcon} />
-                            Kolom
+                            Columns
                             <Badge variant="secondary">
                               {visible.length}/{data.columns.length}
                             </Badge>
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent align="end" className="w-72 space-y-3">
-                          <h2 className="text-sm font-medium">Kolom</h2>
+                          <h2 className="text-sm font-medium">Columns</h2>
                           <Input
-                            aria-label="Cari nama kolom"
-                            placeholder="Cari heading…"
+                            aria-label="Search column names"
+                            placeholder="Search headings…"
                             value={columnQuery}
                             onChange={(event) =>
                               setColumnQuery(event.target.value)
@@ -746,7 +744,7 @@ export function App() {
                                 setPage(1)
                               }}
                             >
-                              Pilih semua
+                              Select all
                             </Button>
                             <Button
                               size="sm"
@@ -757,7 +755,7 @@ export function App() {
                                 setPage(1)
                               }}
                             >
-                              Sembunyikan semua
+                              Hide all
                             </Button>
                           </div>
                           <Separator />
@@ -781,7 +779,7 @@ export function App() {
                             ))}
                             {!columnMatches.length && (
                               <p className="py-3 text-center text-xs text-muted-foreground">
-                                Heading tidak ditemukan.
+                                No headings found.
                               </p>
                             )}
                           </div>
@@ -791,9 +789,7 @@ export function App() {
                     <CollapsibleContent className="mt-3 space-y-3 rounded-lg border bg-muted/20 p-3">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-2 text-xs">
-                          <span className="text-muted-foreground">
-                            Cocokkan
-                          </span>
+                          <span className="text-muted-foreground">Match</span>
                           <Select
                             value={mode}
                             onValueChange={(value) => {
@@ -801,15 +797,15 @@ export function App() {
                               setPage(1)
                             }}
                           >
-                            <SelectTrigger aria-label="Gabungan filter">
+                            <SelectTrigger aria-label="Filter logic">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="and">
-                                Semua kondisi (AND)
+                                All conditions (AND)
                               </SelectItem>
                               <SelectItem value="or">
-                                Salah satu (OR)
+                                Any condition (OR)
                               </SelectItem>
                             </SelectContent>
                           </Select>
@@ -823,7 +819,7 @@ export function App() {
                               setPage(1)
                             }}
                           >
-                            Hapus semua
+                            Clear all
                           </Button>
                         )}
                       </div>
@@ -849,7 +845,7 @@ export function App() {
                               >
                                 <SelectTrigger
                                   className="min-w-28 flex-1"
-                                  aria-label={`Kolom filter ${index + 1}`}
+                                  aria-label={`Filter ${index + 1} column`}
                                 >
                                   <SelectValue />
                                 </SelectTrigger>
@@ -871,7 +867,7 @@ export function App() {
                               >
                                 <SelectTrigger
                                   className="min-w-32 flex-1"
-                                  aria-label={`Operator filter ${index + 1}`}
+                                  aria-label={`Filter ${index + 1} operator`}
                                 >
                                   <SelectValue />
                                 </SelectTrigger>
@@ -892,9 +888,11 @@ export function App() {
                                   type={numeric ? "number" : "text"}
                                   step={numeric ? "any" : undefined}
                                   placeholder={
-                                    numeric ? "Angka…" : "Nilai… (true / false)"
+                                    numeric
+                                      ? "Number…"
+                                      : "Value… (true / false)"
                                   }
-                                  aria-label={`Nilai filter ${index + 1}`}
+                                  aria-label={`Filter ${index + 1} value`}
                                   aria-invalid={!!validation}
                                   aria-describedby={
                                     validation
@@ -914,8 +912,8 @@ export function App() {
                                   className="min-w-24 flex-1"
                                   type="number"
                                   step="any"
-                                  placeholder="Batas atas…"
-                                  aria-label={`Batas atas filter ${index + 1}`}
+                                  placeholder="Upper bound…"
+                                  aria-label={`Filter ${index + 1} upper bound`}
                                   aria-invalid={!!validation}
                                   aria-describedby={
                                     validation
@@ -933,7 +931,7 @@ export function App() {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                aria-label={`Hapus filter ${index + 1}`}
+                                aria-label={`Remove filter ${index + 1}`}
                                 onClick={() => {
                                   setFilters((current) =>
                                     current.filter(
@@ -965,10 +963,10 @@ export function App() {
                         onClick={() => addFilter()}
                       >
                         <HugeiconsIcon icon={Add01Icon} />
-                        Tambah kondisi
+                        Add condition
                       </Button>
                       <p className="text-[10px] text-muted-foreground">
-                        Filter kolom tersembunyi tetap aktif.
+                        Filters on hidden columns remain active.
                       </p>
                     </CollapsibleContent>
                   </Collapsible>
@@ -977,11 +975,11 @@ export function App() {
                     <div className="flex flex-wrap items-center gap-2">
                       {query && (
                         <Badge variant="secondary" className="gap-1">
-                          Cari: {query.slice(0, 30)}
+                          Search: {query.slice(0, 30)}
                           <Button
                             variant="ghost"
                             size="icon-xs"
-                            aria-label="Hapus pencarian"
+                            aria-label="Clear search"
                             onClick={() => {
                               setQuery("")
                               setPage(1)
@@ -1012,7 +1010,7 @@ export function App() {
                           <Button
                             variant="ghost"
                             size="icon-xs"
-                            aria-label={`Hapus kondisi ${filter.column}`}
+                            aria-label={`Remove condition for ${filter.column}`}
                             onClick={() => {
                               setFilters((current) =>
                                 current.filter((item) => item.id !== filter.id)
@@ -1050,7 +1048,7 @@ export function App() {
                                 size="sm"
                                 className="-ml-2 gap-2 font-mono"
                                 onClick={() => toggleSort(column)}
-                                title={`Urutkan ${column}`}
+                                title={`Sort ${column}`}
                               >
                                 {column}
                                 <HugeiconsIcon
@@ -1106,17 +1104,17 @@ export function App() {
                               />
                               <p className="text-sm font-medium">
                                 {!visible.length
-                                  ? "Belum ada kolom ditampilkan"
+                                  ? "No columns selected"
                                   : invalidFilters
-                                    ? "Lengkapi kondisi filter"
-                                    : "Tidak ada data yang cocok"}
+                                    ? "Complete the filter conditions"
+                                    : "No matching data"}
                               </p>
                               <Button
                                 variant="outline"
                                 className="mt-4"
                                 onClick={resetView}
                               >
-                                Reset tampilan
+                                Reset view
                               </Button>
                             </TableCell>
                           </TableRow>
@@ -1127,11 +1125,11 @@ export function App() {
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <p className="text-xs text-muted-foreground" role="status">
                       {filteredRows.length ? start + 1 : 0}–
-                      {Math.min(start + pageSize, filteredRows.length)} dari{" "}
+                      {Math.min(start + pageSize, filteredRows.length)} of{" "}
                       <span className="font-medium text-foreground">
                         {filteredRows.length}
                       </span>{" "}
-                      hasil
+                      results
                     </p>
                     <div className="flex items-center gap-2">
                       <Select
@@ -1141,13 +1139,13 @@ export function App() {
                           setPage(1)
                         }}
                       >
-                        <SelectTrigger aria-label="Baris per halaman">
+                        <SelectTrigger aria-label="Rows per page">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           {[10, 25, 50, 100].map((size) => (
                             <SelectItem key={size} value={String(size)}>
-                              {size} / halaman
+                              {size} / page
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -1155,7 +1153,7 @@ export function App() {
                       <Button
                         variant="outline"
                         size="icon"
-                        aria-label="Halaman sebelumnya"
+                        aria-label="Previous page"
                         disabled={currentPage <= 1}
                         onClick={() => setPage(currentPage - 1)}
                       >
@@ -1167,7 +1165,7 @@ export function App() {
                       <Button
                         variant="outline"
                         size="icon"
-                        aria-label="Halaman berikutnya"
+                        aria-label="Next page"
                         disabled={currentPage >= pages}
                         onClick={() => setPage(currentPage + 1)}
                       >
@@ -1178,7 +1176,7 @@ export function App() {
                 </CardContent>
                 <CardFooter className="justify-end border-t">
                   <Button variant="ghost" size="sm" onClick={resetView}>
-                    Reset tampilan
+                    Reset view
                   </Button>
                 </CardFooter>
               </Card>

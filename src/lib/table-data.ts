@@ -20,15 +20,15 @@ export type Filter = {
 }
 
 export const operators: { value: Operator; label: string }[] = [
-  { value: "contains", label: "Mengandung" },
-  { value: "notContains", label: "Tidak mengandung" },
-  { value: "equals", label: "Sama dengan" },
-  { value: "notEquals", label: "Tidak sama dengan" },
-  { value: "gt", label: "Lebih besar dari" },
-  { value: "lt", label: "Lebih kecil dari" },
-  { value: "between", label: "Di antara" },
-  { value: "empty", label: "Kosong" },
-  { value: "notEmpty", label: "Tidak kosong" },
+  { value: "contains", label: "Contains" },
+  { value: "notContains", label: "Does not contain" },
+  { value: "equals", label: "Equals" },
+  { value: "notEquals", label: "Does not equal" },
+  { value: "gt", label: "Greater than" },
+  { value: "lt", label: "Less than" },
+  { value: "between", label: "Between" },
+  { value: "empty", label: "Is empty" },
+  { value: "notEmpty", label: "Is not empty" },
 ]
 
 export const MAX_BYTES = 5 * 1024 * 1024
@@ -44,7 +44,8 @@ export function cellText(value: Cell | undefined): string {
 function flatten(record: Record<string, unknown>): Row {
   const result: Row = Object.create(null)
   function visit(value: unknown, path: string, depth: number) {
-    if (depth > 20) throw new Error("JSON terlalu dalam. Maksimal 20 tingkat.")
+    if (depth > 20)
+      throw new Error("JSON is too deeply nested. Maximum depth: 20 levels.")
     if (isRecord(value) && Object.keys(value).length) {
       for (const [key, child] of Object.entries(value)) {
         const escaped = key.replaceAll("\\", "\\\\").replaceAll(".", "\\.")
@@ -72,17 +73,16 @@ function flatten(record: Record<string, unknown>): Row {
 export function parseJson(text: string, requestedSource?: string) {
   // ponytail: browser-only, 5 MB / 20,000 rows / 200 columns; use a worker for larger datasets.
   if (new TextEncoder().encode(text).length > MAX_BYTES)
-    throw new Error("JSON maksimal 5 MB.")
-  if (!text.trim())
-    throw new Error("Tempel JSON atau unggah file terlebih dahulu.")
+    throw new Error("JSON must not exceed 5 MB.")
+  if (!text.trim()) throw new Error("Paste JSON or upload a file first.")
   let parsed: unknown
   try {
     parsed = JSON.parse(text)
   } catch {
-    throw new Error("JSON tidak valid. Periksa tanda kutip, koma, dan kurung.")
+    throw new Error("Invalid JSON. Check quotes, commas, and brackets.")
   }
   if (!Array.isArray(parsed) && !isRecord(parsed))
-    throw new Error("Gunakan array berisi objek atau satu objek JSON.")
+    throw new Error("Use an array of objects or a single JSON object.")
 
   const sources = isRecord(parsed)
     ? Object.keys(parsed).filter((key) => Array.isArray(parsed[key]))
@@ -96,18 +96,17 @@ export function parseJson(text: string, requestedSource?: string) {
     : source !== undefined && isRecord(parsed) && Array.isArray(parsed[source])
       ? parsed[source]
       : [parsed]
-  if (records.length > 20_000)
-    throw new Error("Maksimal 20.000 baris per tabel.")
+  if (records.length > 20_000) throw new Error("Maximum 20,000 rows per table.")
   const rows = records.map((record, index) => {
     if (!isRecord(record))
       throw new Error(
-        `Baris ${index + 1} bukan objek. Setiap baris harus berupa objek JSON.`
+        `Row ${index + 1} is not an object. Each row must be a JSON object.`
       )
     return flatten(record)
   })
   const columns = [...new Set(rows.flatMap(Object.keys))]
-  if (columns.length > 200) throw new Error("Maksimal 200 kolom per tabel.")
-  if (columns.includes("")) throw new Error("Nama heading tidak boleh kosong.")
+  if (columns.length > 200) throw new Error("Maximum 200 columns per table.")
+  if (columns.includes("")) throw new Error("Heading names must not be empty.")
   return { rows, columns, sources, source }
 }
 
@@ -120,12 +119,12 @@ function numeric(value: Cell | undefined): number | undefined {
 
 export function filterError(filter: Filter): string | undefined {
   if (["gt", "lt", "between"].includes(filter.operator)) {
-    if (numeric(filter.value) === undefined) return "Masukkan angka yang valid."
+    if (numeric(filter.value) === undefined) return "Enter a valid number."
     if (filter.operator === "between") {
       if (numeric(filter.upper) === undefined)
-        return "Isi batas atas dengan angka."
+        return "Enter a numeric upper bound."
       if (Number(filter.value) > Number(filter.upper))
-        return "Batas atas harus ≥ batas bawah."
+        return "The upper bound must be ≥ the lower bound."
     }
   }
 }
@@ -158,7 +157,7 @@ export function matchesFilter(row: Row, filter: Filter): boolean {
   }
 }
 
-const collator = new Intl.Collator("id", { numeric: true, sensitivity: "base" })
+const collator = new Intl.Collator("en", { numeric: true, sensitivity: "base" })
 
 export function compareCells(a: Cell | undefined, b: Cell | undefined): number {
   if (a == null) return b == null ? 0 : 1

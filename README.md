@@ -1,39 +1,39 @@
 # JSON to Table
 
-Workspace berbasis browser untuk mengubah JSON menjadi tabel interaktif. Pilih kolom, gabungkan kondisi filter, urutkan data, lalu ekspor hasilnya ke CSV—tanpa akun atau backend aplikasi.
+A browser-based workspace for turning JSON into interactive tables. Choose columns, combine filters, sort your data, and export the results as CSV—no account or application backend required.
 
-**Aplikasi:** [ranzxm.github.io/jsontotable](https://ranzxm.github.io/jsontotable/)
+**Live app:** [ranzxm.github.io/jsontotable](https://ranzxm.github.io/jsontotable/)
 
-## Fitur utama
+## Features
 
-- **Input fleksibel** — tempel JSON, unggah file `.json`, atau gunakan drag and drop.
-- **Pemilihan kolom** — cari heading, tampilkan kolom tertentu, atau pilih/sembunyikan seluruh kolom.
-- **Filter gabungan** — gunakan kondisi teks, angka, rentang, boolean, dan nilai kosong dengan logika AND atau OR.
-- **Pencarian global** — cari nilai pada kolom yang sedang ditampilkan.
-- **Sorting dan pagination** — urutkan melalui heading; tampilkan 10, 25, 50, atau 100 baris per halaman.
-- **Ekspor terarah** — unduh CSV berisi seluruh baris hasil filter dan hanya kolom yang dipilih, bukan sekadar halaman aktif.
-- **Tema terang dan gelap** — ganti melalui tombol tema atau pintasan `D` di luar kolom input.
-- **Validasi aman** — kesalahan JSON tidak mengganti tabel yang sudah berhasil dimuat.
+- **Flexible input** — paste JSON, upload a `.json` file, or drag and drop.
+- **Column selection** — search headings, show individual columns, or select/hide all columns.
+- **Combined filters** — filter text, numbers, ranges, booleans, and empty values using AND or OR logic.
+- **Global search** — search values across currently visible columns.
+- **Sorting and pagination** — sort by heading; display 10, 25, 50, or 100 rows per page.
+- **Focused exports** — download all filtered rows and only selected columns, not just the current page.
+- **Light and dark themes** — use the theme button or press `D` when not editing an input.
+- **Non-destructive validation** — invalid JSON leaves the previously loaded table intact.
 
-## Teknologi
+## Tech stack
 
-| Bagian          | Teknologi            |
+| Layer           | Technology           |
 | --------------- | -------------------- |
-| Antarmuka       | React 19, TypeScript |
+| Interface       | React 19, TypeScript |
 | Build tool      | Vite 8               |
-| Komponen        | shadcn/ui, Radix UI  |
+| Components      | shadcn/ui, Radix UI  |
 | Styling         | Tailwind CSS 4       |
-| Ikon            | Hugeicons            |
+| Icons           | Hugeicons            |
 | Package manager | Bun                  |
 
-## Menjalankan secara lokal
+## Getting started
 
-### Prasyarat
+### Prerequisites
 
-- [Bun](https://bun.sh/) versi terbaru yang kompatibel dengan dependensi proyek.
-- Git dan browser modern.
+- A recent version of [Bun](https://bun.sh/) compatible with the project dependencies.
+- Git and a modern browser.
 
-### Instalasi
+### Installation
 
 ```sh
 git clone https://github.com/ranzxm/jsontotable.git
@@ -42,85 +42,87 @@ bun install
 bun run dev
 ```
 
-Buka URL yang ditampilkan Vite di terminal. Tidak diperlukan konfigurasi environment variable untuk menjalankan fitur saat ini.
+Open the URL printed by Vite in your terminal. No environment variables are required for the current features.
 
-## Penggunaan
+## Usage
 
-1. Tempel JSON melalui tab **Tempel JSON**, atau pilih file melalui tab **Unggah file**.
-2. Klik **Buat tabel** setelah mengedit teks JSON. File yang diunggah diproses otomatis.
-3. Buka **Kolom** untuk memilih heading yang ingin ditampilkan.
-4. Buka **Filter**, tambahkan kondisi, lalu pilih **Semua kondisi (AND)** atau **Salah satu (OR)**.
-5. Klik heading untuk beralih antara urutan naik, turun, dan urutan awal.
-6. Klik **Ekspor CSV** untuk mengunduh hasil. Gunakan **Reset tampilan** untuk menghapus pencarian, filter, dan sorting serta menampilkan kembali semua kolom.
+1. Paste JSON in the **Paste JSON** tab, or choose a file in **Upload file**.
+2. Click **Create table** after editing JSON. Uploaded files are processed automatically.
+3. Open **Columns** to choose which headings to display.
+4. Open **Filter**, add conditions, and select **All conditions (AND)** or **Any condition (OR)**.
+5. Click a heading to cycle through ascending, descending, and original order.
+6. Click **Export CSV** to download the results. **Reset view** clears search, filters, and sorting, and restores all columns.
 
-### Format JSON
+### Supported JSON
 
-Format utama adalah array berisi objek:
+The primary input format is an array of objects:
 
 ```json
 [
   {
-    "nama": "Ayu",
-    "alamat": { "kota": "Jakarta" },
-    "gaji": 12000000,
-    "aktif": true,
-    "keahlian": ["Design", "Research"]
+    "name": "Ayu",
+    "address": { "city": "Jakarta" },
+    "salary": 12000000,
+    "active": true,
+    "skills": ["Design", "Research"]
   },
   {
-    "nama": "Bima",
-    "alamat": { "kota": "Bandung" },
-    "gaji": 18000000,
-    "aktif": false
+    "name": "Bima",
+    "address": { "city": "Bandung" },
+    "salary": 18000000,
+    "active": false
   }
 ]
 ```
 
-Heading yang dihasilkan: `nama`, `alamat.kota`, `gaji`, `aktif`, dan `keahlian`.
+The resulting headings are `name`, `address.city`, `salary`, `active`, and `skills`.
 
-- Satu objek JSON juga didukung sebagai satu baris.
-- Jika objek memiliki properti array pada tingkat pertama, aplikasi memilih array pertama. Gunakan **Array sumber** untuk memilih array lainnya.
-- Setiap elemen array sumber harus berupa objek. Array primitif atau campuran ditolak.
-- Objek bertingkat diratakan menjadi heading dengan notasi titik. Titik literal pada nama properti di-escape sebagai `\.` agar tidak bertabrakan dengan heading bertingkat.
-- Array di dalam sel tetap ditampilkan sebagai teks JSON.
-- Heading merupakan gabungan properti seluruh baris. Nilai `null` atau properti yang tidak tersedia ditampilkan sebagai `—`.
+- A single JSON object is also supported as one row.
+- If an object contains top-level array properties, the first array is selected automatically. Use **Source array** to choose another.
+- Every item in the source array must be an object. Primitive or mixed arrays are rejected.
+- Nested objects are flattened into dot-separated headings. Literal dots in property names are escaped as `\.` to distinguish them from nested paths.
+- Arrays inside cells remain JSON text.
+- Headings include properties from all rows. Missing properties and `null` values are displayed as `—`.
 
-### Perilaku filter
+### Filter behavior
 
-- Pencarian dan perbandingan teks tidak membedakan huruf besar/kecil.
-- Pencarian global hanya memeriksa kolom yang ditampilkan; filter per kolom tetap aktif meskipun kolomnya disembunyikan.
-- Boolean dapat difilter menggunakan **Sama dengan** dan nilai `true` atau `false`.
-- Filter angka menerima angka JSON atau teks numerik; nilai kosong dan boolean tidak dianggap angka.
-- Kondisi **Di antara** menyertakan batas bawah dan batas atas.
-- Kondisi **Kosong** mencakup `null`, properti yang tidak tersedia, dan string kosong.
+- Search and text comparisons are case-insensitive.
+- Global search checks only visible columns; per-column filters remain active when their columns are hidden.
+- Filter booleans with **Equals** and the value `true` or `false`.
+- Numeric filters accept JSON numbers and numeric strings. Empty values and booleans are not treated as numbers.
+- **Between** includes both bounds.
+- **Is empty** matches `null`, missing properties, and empty strings.
 
-## Privasi dan batas pemrosesan
+## Privacy and processing limits
 
-Data JSON diproses di browser, tidak dikirim ke server aplikasi, dan tidak disimpan untuk sesi berikutnya. Preferensi tema disimpan di `localStorage`.
+JSON is processed in your browser, not sent to an application server, and not saved for future sessions. Theme preferences are stored in `localStorage`.
 
-| Batas            | Nilai      |
-| ---------------- | ---------- |
-| Ukuran JSON/file | 5 MB       |
-| Baris per tabel  | 20.000     |
-| Kolom per tabel  | 200        |
-| Kedalaman objek  | 20 tingkat |
-| Kondisi filter   | 20         |
+| Limit             | Value     |
+| ----------------- | --------- |
+| JSON/file size    | 5 MB      |
+| Rows per table    | 20,000    |
+| Columns per table | 200       |
+| Object depth      | 20 levels |
+| Filter conditions | 20        |
 
-CSV menggunakan UTF-8 dengan BOM. Nilai yang terdeteksi berpotensi menjadi formula spreadsheet diberi awalan apostrof untuk mengurangi risiko formula injection.
+CSV files use UTF-8 with a BOM. Values detected as potential spreadsheet formulas are prefixed with an apostrophe to reduce formula injection risk.
 
-## Pengembangan
+## Development
 
-### Perintah
+### Commands
 
-| Perintah                       | Fungsi                                                           |
-| ------------------------------ | ---------------------------------------------------------------- |
-| `bun run dev`                  | Menjalankan development server                                   |
-| `bun run build`                | Memeriksa tipe proyek dan menghasilkan build produksi di `dist/` |
-| `bun run preview`              | Meninjau build produksi secara lokal                             |
-| `bun run lint`                 | Menjalankan ESLint                                               |
-| `bun run format`               | Memformat berkas TypeScript dan TSX dengan Prettier              |
-| `bun tests/table-data.test.ts` | Menguji parsing, filter, sorting, dan pembuatan CSV              |
+| Command                        | Purpose                                                         |
+| ------------------------------ | --------------------------------------------------------------- |
+| `bun run dev`                  | Start the development server                                    |
+| `bun run build`                | Type-check the project and create a production build in `dist/` |
+| `bun run preview`              | Preview the production build locally                            |
+| `bun run lint`                 | Run ESLint                                                      |
+| `bun run format`               | Format TypeScript and TSX files with Prettier                   |
+| `bun tests/table-data.test.ts` | Test parsing, filtering, sorting, and CSV generation            |
 
-### Pemeriksaan sebelum perubahan dipublikasikan
+### Validation
+
+Run these checks before publishing changes:
 
 ```sh
 bun tests/table-data.test.ts
@@ -128,53 +130,53 @@ bun run lint
 bun run build
 ```
 
-### Struktur proyek
+### Project structure
 
 ```text
-public/                    Aset statis
+public/                    Static assets
 src/
-  App.tsx                  Workspace dan interaksi pengguna
+  App.tsx                  Workspace and user interactions
   components/
-    ui/                    Komponen shadcn/ui dari CLI
-    theme-provider.tsx     Pengelolaan tema
+    ui/                    CLI-generated shadcn/ui components
+    theme-provider.tsx     Theme management
   lib/
-    table-data.ts          Parsing, validasi, filter, sorting, dan CSV
-    utils.ts               Utilitas antarmuka
-  index.css                Styling dan variabel tema
-  main.tsx                 Entry point aplikasi
+    table-data.ts          Parsing, validation, filters, sorting, and CSV
+    utils.ts               Interface utilities
+  index.css                Styles and theme variables
+  main.tsx                 Application entry point
 tests/
-  table-data.test.ts        Pengujian logika pengolahan data
+  table-data.test.ts        Data-processing tests
 ```
 
-### Komponen antarmuka
+### UI components
 
-Gunakan komponen shadcn/ui melalui CLI resmi:
+Add shadcn/ui components through the official CLI:
 
 ```sh
-bunx --bun shadcn@latest add <komponen>
+bunx --bun shadcn@latest add <component>
 ```
 
-Pertahankan preset di `components.json`, variabel tema, dan desain komponen bawaan. Gunakan Bun untuk pengelolaan dependensi.
+Preserve the preset in `components.json`, theme variables, and default component designs. Use Bun for dependency management.
 
 ## Deployment
 
 ### GitHub Pages
 
-Workflow `.github/workflows/deploy-pages.yml` menjalankan pengujian, lint, build, lalu deploy otomatis setiap push ke `main`. Deployment juga dapat dijalankan secara manual melalui tab **Actions**.
+The `.github/workflows/deploy-pages.yml` workflow runs tests, lint, and a production build, then deploys automatically on every push to `main`. It can also be triggered manually from the **Actions** tab.
 
-- Sumber Pages: **GitHub Actions**, pada **Settings → Pages**.
+- Pages source: **GitHub Actions** under **Settings → Pages**.
 - URL: `https://ranzxm.github.io/jsontotable/`.
-- Base path Vite: `/jsontotable/`, sesuai nama repositori.
+- Vite base path: `/jsontotable/`, matching the repository name.
 
-### Hosting statis lainnya
+### Other static hosts
 
 ```sh
 bun install --frozen-lockfile
 bun run build
 ```
 
-Publikasikan direktori `dist/` pada layanan hosting statis. Sesuaikan `base` di `vite.config.ts` dengan lokasi hosting; gunakan `/` jika aplikasi di-host pada root domain. Tidak diperlukan proses backend. Untuk memeriksa hasil build sebelum deployment, jalankan `bun run preview`.
+Publish the `dist/` directory to a static hosting service. Adjust `base` in `vite.config.ts` to match the deployment path; use `/` when hosting at the domain root. No backend process is required. Run `bun run preview` to check the build before deployment.
 
-## Kontribusi
+## Contributing
 
-Laporkan bug atau usulkan peningkatan melalui [GitHub Issues](https://github.com/ranzxm/jsontotable/issues). Untuk perubahan kode, sertakan penjelasan perilaku yang berubah, pengujian yang relevan, dan pastikan seluruh pemeriksaan di atas berhasil.
+Report bugs or suggest improvements through [GitHub Issues](https://github.com/ranzxm/jsontotable/issues). For code changes, describe the updated behavior, include relevant tests, and make sure all validation checks pass.

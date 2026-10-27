@@ -53,6 +53,8 @@ assert.equal(
   true
 )
 assert.ok(filterError({ ...filter, value: "" }))
+assert.equal(filterError({ ...filter, value: "" }), "Enter a valid number.")
+assert.throws(() => parseJson("{bad}"), /Invalid JSON/)
 assert.ok(filterError({ ...filter, operator: "between", upper: "2" }))
 assert.equal(
   matchesFilter(data.rows[0], {

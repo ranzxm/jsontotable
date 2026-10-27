@@ -1,21 +1,36 @@
-# React + TypeScript + Vite + shadcn/ui
+# JSON to Table
 
-This is a template for a new Vite project with React, TypeScript, and shadcn/ui.
+React + TypeScript + Vite. Komponen shadcn/ui menggunakan preset dan tema bawaan proyek.
 
-## Adding components
-
-To add components to your app, run the following command:
-
-```bash
-npx shadcn@latest add button
+```sh
+bun install
+bun run dev
 ```
 
-This will place the ui components in the `src/components` directory.
+## Fitur
 
-## Using components
+- Tempel JSON atau unggah/tarik file `.json` (maksimal 5 MB).
+- Array objek, satu objek, atau pilih array pada properti tingkat pertama.
+- Objek bertingkat menjadi heading `alamat.kota`; titik literal di nama properti di-escape sebagai `\.`. Array dalam sel tetap JSON.
+- Pilih/sembunyikan heading, cari pada kolom yang ditampilkan.
+- Filter teks, angka, rentang, boolean (`true`/`false`), nilai kosong; gabungkan dengan AND/OR. Kolom tersembunyi tetap dapat difilter.
+- Sorting tiga tahap, pagination, ekspor CSV seluruh hasil filter dengan kolom terpilih. Nilai berpotensi formula spreadsheet dinetralkan.
+- Semua data diproses di browser; tidak disimpan atau dikirim ke server. Tema tersimpan melalui provider bawaan; tombol tema atau pintasan `D`.
 
-To use the components in your app, import them as follows:
+Batas lokal: 20.000 baris, 200 kolom, 20 tingkat objek, 20 kondisi filter. Gunakan worker bila dukungan dataset lebih besar dibutuhkan.
 
-```tsx
-import { Button } from "@/components/ui/button"
+## Validasi
+
+```sh
+bun tests/table-data.test.ts
+bun run lint
+bun run build
 ```
+
+## Komponen tambahan
+
+```sh
+bunx --bun shadcn@latest add <komponen>
+```
+
+Pertahankan `components.json`, variabel tema, dan desain komponen yang dihasilkan CLI.

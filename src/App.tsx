@@ -12,6 +12,7 @@ import {
   Delete02Icon,
   Download04Icon,
   FilterHorizontalIcon,
+  GithubIcon,
   Moon02Icon,
   Search01Icon,
   SourceCodeIcon,
@@ -428,6 +429,21 @@ export function App() {
               </h1>
             </a>
             <div className="flex items-center gap-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon" asChild>
+                    <a
+                      href="https://github.com/ranzxm/jsontotable"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Repository GitHub (tab baru)"
+                    >
+                      <HugeiconsIcon icon={GithubIcon} />
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>GitHub</TooltipContent>
+              </Tooltip>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
